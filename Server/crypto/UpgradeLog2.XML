@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="cryptest">
+</Property><Property Name="Solution File" Value="C:\Programs\zTeam\ZTSeason8\Fixed\ZTSeason8\GameServer\crypto\cryptest.sln">
+</Property><Property Name="User Options File" Value="C:\Programs\zTeam\ZTSeason8\Fixed\ZTSeason8\GameServer\crypto\cryptest.suo">
+</Property><Property Name="Date" Value="20 юни 2015 г.">
+</Property><Property Name="Time" Value="05:19 ч.">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="2" Project="" Source="cryptest.sln" Description="Error creating backup file: C:\Programs\zTeam\ZTSeason8\Fixed\ZTSeason8\GameServer\crypto\cryptest.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="cryptest.suo" Description="File successfully backed up as C:\Programs\zTeam\ZTSeason8\Fixed\ZTSeason8\GameServer\crypto\cryptest.suo.old">
+</Event><Event ErrorLevel="0" Project="cryptlib" Source="cryptlib.vcproj" Description="Converting project file 'C:\Programs\zTeam\ZTSeason8\Fixed\ZTSeason8\GameServer\crypto\cryptlib.vcproj'.">
+</Event><Event ErrorLevel="1" Project="cryptlib" Source="cryptlib.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="cryptlib" Source="cryptlib.vcproj" Description="Done converting to new project file 'C:\Programs\zTeam\ZTSeason8\Fixed\ZTSeason8\GameServer\crypto\cryptlib.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="cryptlib" Source="cryptlib.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="cryptest.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="cryptest.sln" Description="Converted">
+</Event></UpgradeLog>
