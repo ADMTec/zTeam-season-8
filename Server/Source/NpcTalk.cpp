@@ -2244,10 +2244,12 @@ if ( gObjIsConnected(lpObj->m_Index) == FALSE )
 
 BOOL NpcPrivateStoreBoard(LPOBJ lpNpc,LPOBJ lpObj)
 {
-	SHOPBOARD_CGREQ_ITEM lpInfo;
-	lpInfo.ItemID = (WORD)-1;
-	g_ShopBoard.CGReqItemSearch(lpObj->m_Index, &lpInfo);
-	return true;
+       g_ShopBoard.GCSendOpenBoard(lpObj->m_Index);
+
+       SHOPBOARD_CGREQ_ITEM lpInfo;
+       lpInfo.ItemID = (WORD)-1;
+       g_ShopBoard.CGReqItemSearch(lpObj->m_Index, &lpInfo);
+       return true;
 }
 
 #if (CUSTOM_OLYMP==1)
