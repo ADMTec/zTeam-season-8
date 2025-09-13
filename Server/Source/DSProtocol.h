@@ -181,9 +181,7 @@ struct SDHP_DBCHAR_INFORESULT
 	short	HardcoreLife;
 #endif
 	BYTE btExInventory;
-//#ifdef STREAM
-	DWORD m_Credits;
-//#endif
+        DWORD m_Credits; // credits balance
 };
 
 
