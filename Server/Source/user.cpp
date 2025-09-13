@@ -2079,6 +2079,7 @@ BOOL gObjSetCharacter(LPBYTE lpdata, int aIndex)
 	lpObj->MapNumber = lpMsg->MapNumber;
 	lpObj->StartX = lpObj->X;
 	lpObj->StartY = lpObj->Y;
+// codex/audit-code-for-potential-issues
         BYTE btExInventory = lpMsg->btExInventory;
         BYTE clampedExInventory = std::clamp(btExInventory, (BYTE)1, (BYTE)4);
         if (btExInventory != clampedExInventory)
@@ -2087,6 +2088,16 @@ BOOL gObjSetCharacter(LPBYTE lpdata, int aIndex)
         }
 
         lpObj->pInventoryExtend = clampedExInventory;
+
+	
+	//BYTE exInventory = lpMsg->btExInventory;
+	//BYTE clampedExInventory = std::clamp(exInventory, (BYTE)1, (BYTE)4);
+	//if (clampedExInventory != exInventory)
+	//{
+	//	LogAddTD("[JGGetCharacterInfo] btExInventory adjusted from %d to %d", exInventory, clampedExInventory);
+	//}
+	//lpObj->pInventoryExtend = clampedExInventory;
+
 
 	if ( MAX_MAP_RANGE(lpObj->MapNumber) == FALSE )
 	{
