@@ -439,13 +439,13 @@ void gObjSkillUseProcTime500(LPOBJ lpObj)
 
 					if ( gObjIsConnected(lpObj) == FALSE )
 					{
-						LogAdd("΅Ϊ[CHECK_LOG_INFINITY] gObjIsConnected() error %s %d", __FILE__, __LINE__);
+						LogAdd("β…[CHECK_LOG_INFINITY] gObjIsConnected() error %s %d", __FILE__, __LINE__);
 						break;
 					}
 
 					if ( count > 100 )
 					{
-						LogAdd("΅Ϊ[CHECK_LOG_INFINITY] ( _count > 100 ) error %s %d", __FILE__, __LINE__);
+						LogAdd("β…[CHECK_LOG_INFINITY] ( _count > 100 ) error %s %d", __FILE__, __LINE__);
 						break;
 					}
 
@@ -2081,7 +2081,13 @@ BOOL gObjSetCharacter(LPBYTE lpdata, int aIndex)
 	lpObj->StartX = lpObj->X;
 	lpObj->StartY = lpObj->Y;
 	
-	lpObj->pInventoryExtend = lpMsg->btExInventory;
+	BYTE exInventory = lpMsg->btExInventory;
+	BYTE clampedExInventory = std::clamp(exInventory, (BYTE)1, (BYTE)4);
+	if (clampedExInventory != exInventory)
+	{
+		LogAddTD("[JGGetCharacterInfo] btExInventory adjusted from %d to %d", exInventory, clampedExInventory);
+	}
+	lpObj->pInventoryExtend = clampedExInventory;
 
 	if ( MAX_MAP_RANGE(lpObj->MapNumber) == FALSE )
 	{
@@ -3530,7 +3536,7 @@ BOOL gObjSetMonster(int aIndex, int MonsterClass)
 		{
 			if ( gObjSetMonster(iSL, 76) == FALSE )
 			{
-				MsgBox("Γµ°ψΊΈ½ΊΈχ Ό³Α¤ ½ΗΖΠ");
+				MsgBox("μ²κ³µλ³΄μ¤λªΉ μ„¤μ • μ‹¤ν¨");
 				return false;
 			}
 
@@ -3538,7 +3544,7 @@ BOOL gObjSetMonster(int aIndex, int MonsterClass)
 		}
 		else
 		{
-			MsgBox("Γµ°ψΊΈ½ΊΈχ Ό³Α¤ ½ΗΖΠ");
+			MsgBox("μ²κ³µλ³΄μ¤λªΉ μ„¤μ • μ‹¤ν¨");
 			return false;
 		}
 	}
@@ -6482,7 +6488,7 @@ void gObjPlayerKiller(LPOBJ lpObj, LPOBJ lpTargetObj,int MSBDamage)
 				lpObj->AccountID, lpObj->Name, lpObj->lpGuild->Name, lpObj->lpGuild->iGuildUnion, lpObj->lpGuild->iGuildRival,
 				lpTargetObj->AccountID, lpTargetObj->Name, lpTargetObj->lpGuild->Name, lpTargetObj->lpGuild->iGuildUnion, lpTargetObj->lpGuild->iGuildRival);
 		} else {
-			LogAddTD("[U.System][Rival][Player Kill][΅ΪERROR : Can't find GuildInfo] (  [%s][%s] ) vs ( [%s][%s] )",
+			LogAddTD("[U.System][Rival][Player Kill][β…ERROR : Can't find GuildInfo] (  [%s][%s] ) vs ( [%s][%s] )",
 				lpObj->AccountID,lpObj->Name,lpTargetObj->AccountID,lpTargetObj->Name);
 		}
 		return;
@@ -14978,7 +14984,7 @@ BOOL TradeitemInventoryPut(int aIndex)
 			}
 			else
 			{
-				LogAdd("error : ΐΜ°Η Ε«ΐΟ³ª΄ΒΐΟ!!");
+				LogAdd("error : μ΄κ±΄ ν°μΌλ‚λ”μΌ!!");
 				return false;
 			}
 		}
@@ -25111,7 +25117,7 @@ void MakeRewardSetItem(int aIndex, BYTE cDropX, BYTE cDropY, int iRewardType, in
 
 	if(iRewardType == 1)
 	{
-		LogAddTD("[΅Ϊ΅ΩReward][KUNDUN] [%s][%s] Set Item itemnum:[%d] skill:[%d] luck:[%d] option:[%d] SetOption:[%d]",
+		LogAddTD("[β…β†Reward][KUNDUN] [%s][%s] Set Item itemnum:[%d] skill:[%d] luck:[%d] option:[%d] SetOption:[%d]",
 			gObj[aIndex].AccountID,gObj[aIndex].Name,itemnum,Option1,Option2,Option3,SetOption);
 	}
 	else
