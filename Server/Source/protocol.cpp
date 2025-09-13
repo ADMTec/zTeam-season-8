@@ -904,7 +904,10 @@ void ProtocolCore(BYTE protoNum, unsigned char * aRecv, int aLen, int aIndex, BO
 					case 0x03:
 						g_ElementalSystem.CGUpgradeButtonClick((PMSG_ERTEL_LEVELUP*)aRecv,aIndex);
 						break;
-					case 0x31:
+                                        case 0x30:
+                                                g_ShopBoard.GCSendOpenBoard(aIndex);
+                                                break;
+                                        case 0x31:
 						g_ShopBoard.CGReqItemSearch(aIndex, (SHOPBOARD_CGREQ_ITEM*)aRecv);
 						break;
 					}
@@ -2415,7 +2418,7 @@ void CSPJoinIdPassRequestTEST(PMSG_IDPASS * lpMsg, int aIndex)
 
 	PHeadSetB((LPBYTE)&spMsg, 0x11, sizeof(spMsg));
 	spMsg.Number = aIndex;
-	wsprintf(szId, "½¸µ¹ÀÌ%d", logincounttest);
+	wsprintf(szId, "ìŠ›ëŒì´%d", logincounttest);
 	wsprintf(szPass, "m321", rand()%9);
 	LogAdd("login send : %s %s", szId, szPass);
 	
@@ -13217,7 +13220,7 @@ void CGBeattackRecv(unsigned char* lpRecv, int aIndex, int magic_send)
 		{
 			if ( lpObj->DurMagicKeyChecker.IsValidDurationTime(lpMsg->MagicKey) == FALSE )
 			{
-				LogAddC(0, "¡Ú¡Ú¡Ú¡Ú InValid DurationTime Key = %d ( Time : %d) [%s][%s]",
+				LogAddC(0, "â˜…â˜…â˜…â˜… InValid DurationTime Key = %d ( Time : %d) [%s][%s]",
 					lpMsg->MagicKey, lpObj->DurMagicKeyChecker.GetValidDurationTime(lpMsg->MagicKey),
 					lpObj->AccountID, lpObj->Name); 
 				lOfs += sizeof(PMSG_BEATTACK);
@@ -13227,7 +13230,7 @@ void CGBeattackRecv(unsigned char* lpRecv, int aIndex, int magic_send)
 			
 			if ( lpObj->DurMagicKeyChecker.IsValidCount(lpMsg->MagicKey) == FALSE )
 			{
-				LogAddC(0, "¡Ú¡Ú¡Ú¡Ú InValid VailidCount = %d ( Count : %d) [%s][%s]",
+				LogAddC(0, "â˜…â˜…â˜…â˜… InValid VailidCount = %d ( Count : %d) [%s][%s]",
 					lpMsg->MagicKey, lpObj->DurMagicKeyChecker.GetValidCount(lpMsg->MagicKey),
 					lpObj->AccountID, lpObj->Name); 
 				lOfs += sizeof(PMSG_BEATTACK);
@@ -15583,7 +15586,7 @@ void GCGetMutoNumRecv(PMSG_GETMUTONUMBER* lpMsg, int aIndex)
 	if ( gObj[aIndex].MutoNumber != 0 )
 	{
 		char msg[255];
-		wsprintf(msg, "ÀÌ¹Ì ·ç°¡µåÀÇ ¼ýÀÚ°¡ ÀÖ½À´Ï´Ù");
+		wsprintf(msg, "ì´ë¯¸ ë£¨ê°€ë“œì˜ ìˆ«ìžê°€ ìžˆìŠµë‹ˆë‹¤");
 		GCServerMsgStringSend(msg, aIndex, 1);
 		return;
 	}
@@ -16420,7 +16423,7 @@ void CGReqMoveOtherServer(PMSG_REQ_MOVE_OTHERSERVER * lpMsg, int aIndex)
 		LogAddTD("[CharTrasfer] Fail (JoominNumber) [%s][%s]",
 			lpObj->AccountID, lpObj->Name);
 
-		GCServerMsgStringSend("¹®Á¦ ¹ß»ý½Ã change@webzen.co.kr·Î ¹®ÀÇÇØ ÁÖ½Ã±â¹Ù¶ø´Ï´Ù", lpObj->m_Index, 1);
+		GCServerMsgStringSend("ë¬¸ì œ ë°œìƒì‹œ change@webzen.co.krë¡œ ë¬¸ì˜í•´ ì£¼ì‹œê¸°ë°”ëžë‹ˆë‹¤", lpObj->m_Index, 1);
 
 		return;
 	}
@@ -17325,7 +17328,7 @@ void GCGuildViewportInfo(PMSG_REQ_GUILDVIEWPORT * aRecv, int aIndex)
 	}
 	else
 	{
-		LogAddTD("¡Ú¡Ú¡Ù ±æµå Á¤º¸ Ã£À»¼ö ¾øÀ½. ÀÌ¸§ : [%s] ¹øÈ£ : %d",
+		LogAddTD("â˜…â˜…â˜† ê¸¸ë“œ ì •ë³´ ì°¾ì„ìˆ˜ ì—†ìŒ. ì´ë¦„ : [%s] ë²ˆí˜¸ : %d",
 			lpObj->Name, dwGuildNumber);
 	}
 }
@@ -17876,14 +17879,14 @@ void CGRelationShipReqKickOutUnionMember(PMSG_KICKOUT_UNIONMEMBER_REQ* aRecv, in
 	if ( gObjIsConnected(&gObj[aIndex]) == FALSE )
 	{
 		GCResultSend(aIndex, 0x51, 3);
-		MsgOutput(aIndex, "¡Ú Terminated User.");
+		MsgOutput(aIndex, "â˜… Terminated User.");
 		return;
 	}
 
 	if ( lpObj->lpGuild == NULL )
 	{
 		GCResultSend(aIndex, 0x51, 3);
-		MsgOutput(aIndex, "¡Ù Terminated Guild.");
+		MsgOutput(aIndex, "â˜† Terminated Guild.");
 		return;
 	}
 

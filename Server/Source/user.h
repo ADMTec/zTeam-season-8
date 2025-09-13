@@ -1361,9 +1361,7 @@ struct OBJECTSTRUCT
 	DWORD	m_dwPostTickCount;
 	DWORD	m_dwVaultTickCount;
 
-//#ifdef STREAM
 	DWORD	m_Credits;
-//#endif
 
 //#if( ENABLE_CUSTOM_HARDCORE == 1 )
 	short	m_HardcoreLife;

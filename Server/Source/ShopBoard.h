@@ -38,6 +38,7 @@ public:
 			ShopBoard();
 	virtual ~ShopBoard();
 	// ----
+	void	GCSendOpenBoard(int UserIndex);
 	void	CGReqItemSearch(int UserIndex, SHOPBOARD_CGREQ_ITEM* lpData);
 	void	GCAnsItemSearch(int UserIndex, WORD ItemID);
 	// ----

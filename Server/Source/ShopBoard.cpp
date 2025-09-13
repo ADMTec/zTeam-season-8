@@ -17,6 +17,14 @@ ShopBoard::~ShopBoard()
 }
 // -------------------------------------------------------------------------------
 
+void ShopBoard::GCSendOpenBoard(int UserIndex)
+{
+	PBMSG_HEAD2 pMsg;
+	PHeadSubSetB((LPBYTE)&pMsg, 0xEC, 0x30, sizeof(pMsg));
+	DataSend(UserIndex, (LPBYTE)&pMsg, pMsg.size);
+}
+// -------------------------------------------------------------------------------
+
 void ShopBoard::CGReqItemSearch(int UserIndex, SHOPBOARD_CGREQ_ITEM* lpData)
 {
 	if( !OBJMAX_RANGE(UserIndex) )
@@ -89,6 +97,7 @@ void ShopBoard::GCAnsItemSearch(int UserIndex, WORD ItemID)
 	lpAnswer.h.sizeH	= SET_NUMBERH(Offset);
 	lpAnswer.h.sizeL	= SET_NUMBERL(Offset);
 	lpAnswer.Count		= Count;
+	lpAnswer.Unknown6	= 0;
 	memcpy(&Temp[0], (LPBYTE)&lpAnswer, sizeof(SHOPBOARD_GCANS_SHOPCOUNT));
 	// ----
 	DataSend(UserIndex, Temp, Offset);

@@ -18,6 +18,7 @@
 #include "EledoradoEvent.h"
 #include "TNotice.h"
 #include "zzzmathlib.h"
+#include <algorithm>
 #include "Gate.h"
 #include "ObjAttack.h"
 #include "SProtocol.h"
@@ -2046,9 +2047,7 @@ BOOL gObjSetCharacter(LPBYTE lpdata, int aIndex)
 		LogAdd("error-L1 : ChaosBox Init error %s %d", __FILE__, __LINE__);
 	}
 
-//#ifdef STREAM
 	lpObj->m_Credits = lpMsg->m_Credits;
-//#endif
 
 #if( ENABLE_CUSTOM_HARDCORE == 1 )
 	lpObj->m_HardcoreLife = lpMsg->HardcoreLife;
@@ -2080,14 +2079,25 @@ BOOL gObjSetCharacter(LPBYTE lpdata, int aIndex)
 	lpObj->MapNumber = lpMsg->MapNumber;
 	lpObj->StartX = lpObj->X;
 	lpObj->StartY = lpObj->Y;
+// codex/audit-code-for-potential-issues
+        BYTE btExInventory = lpMsg->btExInventory;
+        BYTE clampedExInventory = std::clamp(btExInventory, (BYTE)1, (BYTE)4);
+        if (btExInventory != clampedExInventory)
+        {
+                LogAddC(2, "[InventoryExpansion] invalid %d for [%s][%s]", btExInventory, lpObj->AccountID, lpObj->Name);
+        }
+
+        lpObj->pInventoryExtend = clampedExInventory;
+
 	
-	BYTE exInventory = lpMsg->btExInventory;
-	BYTE clampedExInventory = std::clamp(exInventory, (BYTE)1, (BYTE)4);
-	if (clampedExInventory != exInventory)
-	{
-		LogAddTD("[JGGetCharacterInfo] btExInventory adjusted from %d to %d", exInventory, clampedExInventory);
-	}
-	lpObj->pInventoryExtend = clampedExInventory;
+	//BYTE exInventory = lpMsg->btExInventory;
+	//BYTE clampedExInventory = std::clamp(exInventory, (BYTE)1, (BYTE)4);
+	//if (clampedExInventory != exInventory)
+	//{
+	//	LogAddTD("[JGGetCharacterInfo] btExInventory adjusted from %d to %d", exInventory, clampedExInventory);
+	//}
+	//lpObj->pInventoryExtend = clampedExInventory;
+
 
 	if ( MAX_MAP_RANGE(lpObj->MapNumber) == FALSE )
 	{
